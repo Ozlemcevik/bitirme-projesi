@@ -5,6 +5,7 @@ const Category = () => {
            {name: "elektronik"} ,
            {name: "kitap"} ,
            {name: "takı"} ,
+           {name: "ayakkabı"} ,
 
         ]
     return(

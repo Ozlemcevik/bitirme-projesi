@@ -2,45 +2,31 @@
 
 import Image from "next/image"
 import PageContainer from "../containers/PageContainer"
-import Counter from "../general/Counter"
-import { useState } from "react"
+import { Rating } from "@mui/material"
 
-export type CardProductProps = {
-  id: string,
-  name:string,
-  description:string 
-  price:number 
-  quantity:number 
-  image:string
-}
 
-const DetailClient = ({product} : {product:any}) => {
 
-  // const [cardProducti setCardProduct] = useState<CardProductProps>({
-  //   id: product.id,
-  //   name:product.name,
-  //   description: product.description, 
-  //   price: 1 ,
-  //   quantity: product.quantity ,
-  //   image: product.image
 
-  // })
+const DetailClient = ({products}: {products: any}) => {
+
+let productRating = products?.reviews?.reduce((acc: number, item: any) => acc + item.rating, 0) / products?.reviews?.length
   return (
-    <div className="bg-gray-600 my-10">
-       <PageContainer>
-            <div className="block md:flex gap-10 justify-center">
-              <div className="relative h-[400px] w-[400px] ">
-                <Image src={product?.image} fill alt=''/>
+        <PageContainer>
+             <div className="block md:flex gap-10 justify-center">
+                <div className="relative h-[200px] md:h-[400px] w-[200px] md:w-[400px] mb-3 md:mb-0">
+                   <Image src={products?.image} fill alt=""/>
+                </div>
+                <div className="w-full md:w-1/2 space-y-3">
+                    <div className="text-xl md:text-2xl">{products?.name}</div>
+                    <Rating name="read-only" value={productRating} readOnly />
+                    <div className="text-slate-500">{products?.description}</div>
+              
+                 
               </div>
-              <div className="w-1/2 space-y-3">
-                  <div className="text-xl md:text-2xl">{product?.name}</div>
-                  <div className="text-slate-500">{product?.description}</div>
-              </div>
-                {/* <Counter cardProduct={cardProduct}/> */}
-            </div>
-       </PageContainer>
-    </div>
+             </div>
+        </PageContainer>
+      
   )
+  
 }
-
 export default DetailClient
